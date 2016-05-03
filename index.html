@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js ie8 lt-ie9 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9 lt-ie10"><![endif]-->
+<!--[if !IE]><!--><html class="no-js" lang="fr_FR"><!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>choice</title>
+
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" href="favicon.png" /> -->
+
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <script src="http://myconsole.matdev.fr/mylog.dev-6.0.0.js"></script>
+    <script type="text/javascript">(function(){var methods=['php','show','hide','info','loop','red','Red','orange','yellow','green','Green','blue','violet','white','grey','black','time','size','key','button','range'];var length=methods.length;var console=(window.log=window.log||{});while(length--){if(!log[methods[length]])log[methods[length]]=function(){};}})();</script>
+
+<style type="text/css">
+
+    nav{
+        position: relative;
+        top: 150px;
+        width: 102px; height: 46px;
+        margin: auto;
+        background-color: #eee;
+        box-shadow: inset 0 0 5px #aaa;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .move{
+        position: absolute;
+        left: 1px; top: 1px;
+        width: 100px; height: 44px;
+        background-color: #fafafa;
+        box-shadow: 0 0 5px #aaa, inset 1px 1px 1px #fff, inset -1px -1px 1px #eee;
+        border-radius: 4px;
+        cursor: -webkit-grab;
+        overflow: hidden;
+    }
+
+    .move:active{
+        cursor: -webkit-grabbing;
+    }
+
+    /* iPad [portrait + landscape] */
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .move, .move:active{
+            cursor: auto;
+        }
+    }
+
+    /* iPhone [portrait + landscape] */
+    @media only screen and (max-device-width: 480px) {
+        .move, .move:active{
+            cursor: auto;
+        }
+    }
+
+
+    .liste{
+        margin: 0;
+        padding: 7px 5px;
+    }
+
+    .liste li{
+        font-family: arial;
+        font-size: 12px;
+        color: #bbb;
+        position: absolute;
+        display: block;
+        text-align: center;
+        padding: 9px 15px;
+        cursor: pointer;
+    }
+
+
+    .double{
+        position: absolute;
+        left: 0;
+        margin: 0;
+        padding: 7px 5px;
+    }
+
+    .double li{
+        top: 6px;
+        font-family: arial;
+        font-size: 12px;
+        color: #888;
+        position: absolute;
+        display: block;
+        text-align: center;
+        padding: 9px 15px;
+    }
+
+
+
+</style>
+</head>
+<body>
+
+
+
+
+    <nav>
+        <ul class="liste">
+            <li>OFF</li>
+            <li>ON</li>
+        </ul>
+        <div class="move"></div>
+    </nav>
+
+
+
+
+    <!-- <nav>
+        <ul class="liste">
+            <li>un truc</li>
+            <li>deux truc</li>
+            <li>trois truc</li>
+            <li>quatre truc</li>
+        </ul>
+        <div class="move"></div>
+    </nav> -->
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+
+function nav(){
+
+    var $nav = $('nav'),
+        $liste = $('.liste', $nav),
+        $move = $('.move', $nav),
+        array = [];
+
+    $liste.clone().appendTo( $('.move') ).addClass('double').removeClass('liste');
+
+    $('.liste li', $nav).each(function(){
+        array.push( $(this).outerWidth(true) );
+    });
+
+    var max = Math.max.apply( Math, array );
+
+    $('.liste li', $nav).each(function(i){
+        $(this).css({'width': max, 'left': max*i+1, 'padding-left':0, 'padding-right':0 })
+    });
+
+    $('.double li', $nav).each(function(i){
+        $(this).css({'width': max, 'left': max*i, 'padding-left':0, 'padding-right':0 })
+    });
+
+    $('.move', $nav).css({'width':max} )
+
+    $nav.css({'width': max*array.length+2})
+
+    $move.on('mousedown touchstart', function(event){
+
+        event.preventDefault();
+        if(event.type == 'touchstart') event = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+
+        var $this = $(this),
+            $parent = $this.parent(),
+            sizeObj = $this.outerWidth(true),
+            sizeParent = $parent.width(),
+            posParent = $parent.offset().left,
+            offsetMouse = event.pageX - $this.offset().left;
+
+
+        $(document).on('mousemove.move touchmove.move', function(event){
+
+            event.preventDefault();
+
+            if(event.type == 'touchmove') event = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+
+            var posObj = event.pageX - posParent - offsetMouse;
+
+            if( posObj < 1) posObj = 1;
+            if( posObj > sizeParent - sizeObj - 1) posObj = sizeParent - sizeObj - 1;
+
+            $this.css({ 'left': posObj });
+
+            $('.double').css({ 'left': -posObj + 1 });
+
+        });
+
+    });
+
+    $(document).on('mouseup touchend', function(e){
+
+        $(document).off('mousemove.move touchmove.move');
+
+        var $parent = $move.parent(),
+            posObj = $move.position().left,
+            speed = 150,
+            page = Math.floor( (posObj-max/2)/max )+1;
+        
+        log.loop(posObj, 'posObj');
+        log.loop( page , 'page');
+
+        $move.animate({'left': max*page+1}, speed)
+        $('.double').animate({'left': -max*page}, speed)
+
+    });
+
+    $('li', $liste).click(function(e){
+
+        var test = $(this).position().left
+
+        $('.move').animate({'left': test }, 150)
+        $('.double').animate({'left': -test+1}, 150)
+        
+    })
+
+};
+
+nav();
+    
+});
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,221 @@
+    #mydev p{
+        margin:0;padding:0;
+    }
+
+    #mydev{
+        font-family: 'helvetica neue';
+        font-size: 12px;
+        position: absolute;
+        width: 150px; height: 250px;
+        border: solid 1px #000;
+        z-index: 999999999999999999999999;
+        cursor: move;
+        overflow: hidden;
+    }
+
+    #mydev #myback{
+        position: absolute;
+        width: 100%; height: 100%;
+        background-color: #999999;
+        background-color: #ddd;
+        -moz-opacity: 0.80;
+        -khtml-opacity: 0.80;
+        opacity: 0.80;
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=50);
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+        filter:alpha(opacity=50);
+        z-index: -1;
+    }
+
+    #mydev #mytop{
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 18px;
+        background-color: #555;
+        cursor: move;
+        z-index: 1;
+    }
+
+    #mydev #myclose{
+        position: absolute;
+        left: 2px; top: 2px;
+        width: 13px; height: 13px;
+        background-color: black;
+        cursor: pointer;
+    }
+
+    #mydev .myresize{
+        position: absolute;
+        *background-color: rgb(0,0,0);
+        *filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+        /*background-color: rgba(255,0,0,0.2);*/
+    }
+
+    #mydev .myresize.s{
+        right: 0px; top: 0px;
+        width: 30px; height: 100%;
+        cursor: e-resize;
+    }
+
+    #mydev .myresize.e{
+        left: 0px; bottom: 0px;
+        width: 100%; height: 30px;
+        cursor: s-resize;
+    }
+
+    #mydev .myresize.se{
+        right: 0px; bottom: 0px;
+        width: 30px; height: 30px;
+        cursor: se-resize;
+    }
+
+
+/* color */
+
+    #mydev #myconsole {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        overflow: scroll;
+        padding-top: 18px;
+    }
+
+    #mydev #myconsole .mysection{
+        position: relative;
+        padding: 5px 5px 5px 5px;
+        color:#a81a8f;
+        letter-spacing: 1px;
+        font-family: monospace;
+        border-bottom: dotted 1px #fff;
+        /*white-space: pre;*/
+    }
+
+    #mydev #myconsole .mynum{
+        position: absolute;
+        right: 5px; top: 5px;
+        color: #888;
+        margin: 0;
+        padding: 0;
+    }
+
+    #mydev #myconsole .mysection:nth-child(even){
+        background-color: rgba(100,150,200,0.08);
+    }
+
+    #mydev #myconsole .mysection:hover{
+        background-color: rgba(100,150,200,0.18);
+    }
+
+
+    #mydev #myconsole .mysection p{
+        /*padding: 0 5px;*/
+        /*cursor: pointer;*/
+    }
+
+    #mydev #myconsole .mysection p:hover{
+        /*background-color: rgba(100,150,200,0.2);*/
+        /*padding: 0 5px;*/
+        /*border-radius: 5px;*/
+    }
+
+    #mydev #myconsole .mytab{
+        padding: 0px 15px;
+    }
+
+    #mydev #myconsole .mytab:hover{
+        background-color: rgba(100,150,200,0.2);
+        border-radius: 5px;
+    }
+
+    #mydev #myconsole .mysection .dev{
+        cursor: pointer;
+    }
+
+    #mydev #myconsole .mysection .myred{
+        color:#c21d1f;
+    }
+
+    #mydev #myconsole .mysection .myyellow{
+        color:#826b2e;
+    }
+
+    #mydev #myconsole .mysection .mytitle{
+        color:#333;
+    }
+
+
+    #mydev #myconsole .mysection.blue{
+        background-color: rgba(100,150,200,0.4);
+    }
+    #mydev #myconsole .mysection.red{
+        background-color: rgba(200,150,100,0.4);
+    }
+    #mydev #myconsole .mysection.green{
+        background-color: rgba(100,200,150,0.4);
+    }
+    #mydev #myconsole .mysection.grey{
+        background-color: rgba(150,150,160,0.4);
+    }
+    #mydev #myconsole .yellow{
+        background-color: rgba(235,235,80,1);
+    }
+
+
+    #mydev #myconsole .blue:hover, #mydev #myconsole .blue .myselect:hover{
+        background-color: rgba(100,150,200,0.5);
+    }
+    #mydev #myconsole .red:hover, #mydev #myconsole .red .myselect:hover{
+        background-color: rgba(200,150,100,0.5);
+    }
+    #mydev #myconsole .green:hover, #mydev #myconsole .green .myselect:hover{
+        background-color: rgba(100,200,150,0.5);
+    }
+    #mydev #myconsole .grey:hover, #mydev #myconsole .grey .myselect:hover{
+        background-color: rgba(150,150,160,0.5);
+    }
+    /*#mydev #myconsole .grey:hover, #mydev #myconsole .yellow .myselect:hover{
+        background-color: rgba(150,0,160,0.5);
+    }*/
+
+
+    #mydev #myconsole .blue .mytitle{
+        color: rgb(0,40,80);
+    }
+    #mydev #myconsole .red .mytitle{
+        color: rgb(80,40,0);
+    }
+    #mydev #myconsole .green .mytitle{
+        color: rgb(0,80,40);
+    }
+    #mydev #myconsole .grey .mytitle{
+        color: rgb(40,40,45);
+    }
+
+    
+
+    /* == iPad/iPhone [portrait + landscape] == */
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        #mydev .myresize.se{
+            width: 50px; height: 50px;
+        }
+        #mydev .myresize.s{
+            width: 50px;
+        }
+        #mydev .myresize.e{
+            height: 50px;
+        }
+    }
+
+    /* iPhone [portrait + landscape] */
+    @media only screen and (max-device-width: 480px) {
+        #mydev .myresize.se{
+            width: 70px; height: 70px;
+        }
+        #mydev .myresize.s{
+            width: 70px;
+        }
+        #mydev .myresize.e{
+            height: 70px;
+        }
+
+    }
