@@ -17,7 +17,7 @@
     <!-- <link rel="icon" href="favicon.ico" />
     <link rel="icon" type="image/png" href="favicon.png" /> -->
 
-    <link rel="stylesheet" href="styles/styles.css" />
+    <!-- <link rel="stylesheet" href="styles/styles.css" /> -->
 
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -34,73 +34,74 @@
         background-color: #eee;
         box-shadow: inset 0 0 5px #aaa;
         border-radius: 5px;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
 
-    .move{
-        position: absolute;
-        left: 1px; top: 1px;
-        width: 100px; height: 44px;
-        background-color: #fafafa;
-        box-shadow: 0 0 5px #aaa, inset 1px 1px 1px #fff, inset -1px -1px 1px #eee;
-        border-radius: 4px;
-        cursor: -webkit-grab;
-        overflow: hidden;
-    }
-
-    .move:active{
-        cursor: -webkit-grabbing;
-    }
-
-    /* iPad [portrait + landscape] */
-    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .move, .move:active{
-            cursor: auto;
+        .move{
+            position: absolute;
+            left: 1px; top: 1px;
+            width: 100px; height: 44px;
+            /*background-color: #fafafa;*/
+            background-color: #fff;
+            box-shadow: 0 0 5px #aaa, inset 1px 1px 1px #fff, inset -1px -1px 1px #eee;
+            border-radius: 4px;
+            cursor: -webkit-grab;
+            overflow: hidden;
         }
-    }
 
-    /* iPhone [portrait + landscape] */
-    @media only screen and (max-device-width: 480px) {
-        .move, .move:active{
-            cursor: auto;
+        .move:active{
+            cursor: -webkit-grabbing;
         }
-    }
+
+        /* iPad [portrait + landscape] */
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+            .move, .move:active{
+                cursor: auto;
+            }
+        }
+
+        /* iPhone [portrait + landscape] */
+        @media only screen and (max-device-width: 480px) {
+            .move, .move:active{
+                cursor: auto;
+            }
+        }
 
 
-    .liste{
-        margin: 0;
-        padding: 7px 5px;
-    }
+        .liste{
+            margin: 0;
+            padding: 7px 5px;
+        }
 
-    .liste li{
-        font-family: arial;
-        font-size: 12px;
-        color: #bbb;
-        position: absolute;
-        display: block;
-        text-align: center;
-        padding: 9px 15px;
-        cursor: pointer;
-    }
+        .liste li{
+            font-family: arial;
+            font-size: 12px;
+            color: #bbb;
+            position: absolute;
+            display: block;
+            text-align: center;
+            padding: 9px 15px;
+            cursor: pointer;
+        }
 
 
-    .double{
-        position: absolute;
-        left: 0;
-        margin: 0;
-        padding: 7px 5px;
-    }
+        .double{
+            position: absolute;
+            left: 0;
+            margin: 0;
+            padding: 7px 5px;
+        }
 
-    .double li{
-        top: 6px;
-        font-family: arial;
-        font-size: 12px;
-        color: #888;
-        position: absolute;
-        display: block;
-        text-align: center;
-        padding: 9px 15px;
-    }
+        .double li{
+            top: 6px;
+            font-family: arial;
+            font-size: 12px;
+            color: #888;
+            position: absolute;
+            display: block;
+            text-align: center;
+            padding: 9px 15px;
+        }
 
 
 
@@ -109,39 +110,43 @@
 <body>
 
 
+    <!-- <input type="checkbox" value="valeur" class="test1" /> -->
 
+    <!-- <input type="radio" name="Group" value="aaa" class="test1" /> 
+    <input type="radio" name="Group" value="bbb" class="test1" />
+    <input type="radio" name="Group" value="ccc" class="test1" /> -->
 
     <nav>
+
         <ul class="liste">
-            <li>OFF</li>
-            <li>ON</li>
+            <li>AAA</li>
+            <li>BBB</li>
+            <li>CCC</li>
         </ul>
+
         <div class="move"></div>
+
+        <br/><br/><br/>
+
+        <input type="radio" name="Group" value="aaa" label="AAA" class="test1" checked="checked" /> 
+        <input type="radio" name="Group" value="bbb" label="BBB" class="test1" />
+        <input type="radio" name="Group" value="ccc" label="CCC" class="test1" />
+
     </nav>
-
-
-
-
-    <!-- <nav>
-        <ul class="liste">
-            <li>un truc</li>
-            <li>deux truc</li>
-            <li>trois truc</li>
-            <li>quatre truc</li>
-        </ul>
-        <div class="move"></div>
-    </nav> -->
-
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 
+    // var $test1 = $('.test1');
+    // $test1.hide().wrapAll('<div class="test" />');
+
 
 function nav(){
 
     var $nav = $('nav'),
+        speed = 150,
         $liste = $('.liste', $nav),
         $move = $('.move', $nav),
         array = [];
@@ -159,16 +164,19 @@ function nav(){
     });
 
     $('.double li', $nav).each(function(i){
-        $(this).css({'width': max, 'left': max*i, 'padding-left':0, 'padding-right':0 })
+        $(this).css({'width': max, 'left': max*i, 'padding-left':0, 'padding-right':0 });;
     });
 
-    $('.move', $nav).css({'width':max} )
+    $('.move', $nav).css({'width':max} );
 
-    $nav.css({'width': max*array.length+2})
+    $nav.css({'width': max*array.length+2});
+
+    var move = false;
 
     $move.on('mousedown touchstart', function(event){
 
         event.preventDefault();
+
         if(event.type == 'touchstart') event = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
 
         var $this = $(this),
@@ -194,6 +202,8 @@ function nav(){
 
             $('.double').css({ 'left': -posObj + 1 });
 
+            move = true;
+
         });
 
     });
@@ -202,26 +212,43 @@ function nav(){
 
         $(document).off('mousemove.move touchmove.move');
 
+        if(move)
+            move = false;
+        else
+            return;
+
         var $parent = $move.parent(),
             posObj = $move.position().left,
-            speed = 150,
-            page = Math.floor( (posObj-max/2)/max )+1;
-        
-        log.loop(posObj, 'posObj');
-        log.loop( page , 'page');
+            index = Math.floor( (posObj-max/2)/max )+1;
 
-        $move.animate({'left': max*page+1}, speed)
-        $('.double').animate({'left': -max*page}, speed)
+        var label = $('li', $liste).eq(index).text();
+        
+        // log.loop( posObj, 'posObj');
+        // log.loop( index , 'index');
+        // log.loop( $('li', $liste).eq(index), 'node');
+        // log.loop( $('li', $liste).eq(index).text(), 'label');
+
+        $('.test1[label="'+label+'"]').prop( "checked", true ).trigger("change");
+
+        $move.animate({'left': max*index+1}, speed);
+        $('.double').stop(true, false).animate({'left': -max*index}, speed);
 
     });
 
-    $('li', $liste).click(function(e){
+    $('li', $liste).on('mousedown', function(e){
 
-        var test = $(this).position().left
-
-        $('.move').animate({'left': test }, 150)
-        $('.double').animate({'left': -test+1}, 150)
+        var test = $(this).position().left;
         
+        var label = $(this).text();
+        $('.test1[label="'+label+'"]').prop( "checked", true ).trigger("change");
+
+        $move.animate({'left': test }, speed);
+        $('.double').animate({'left': -test+1}, speed);
+        
+    });
+
+    $('.test1').change(function(){
+        log.green( $(this).val() );
     })
 
 };
